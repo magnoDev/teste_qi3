@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>pedidos_pagamentos</name>
+    <name>descricoes_item</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,10 +427,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2022/01/05 21:11:13.897</created_date>
+    <created_date>2022/01/06 12:10:30.812</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2022/01/05 21:11:13.897</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2022/01/06 12:10:30.812</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -489,38 +488,28 @@
   </connection>
   <order>
     <hop>
-      <from>Aba Pedidos_envios</from>
+      <from>Sort rows</from>
+      <to>Unique rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Unique rows</from>
+      <to>Tabela descricoes</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Aba Itens(descricao)</from>
       <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input</from>
-      <to>Sort Tabela Pedidos</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Select values</from>
-      <to>Sort - Pedidos_pagamentos</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort - Pedidos_pagamentos</from>
-      <to>Merge join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort Tabela Pedidos</from>
-      <to>Merge join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge join</from>
-      <to>Tabela Pedidos_pagamentos</to>
+      <to>Sort rows</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Aba Pedidos_envios</name>
+    <name>Aba Itens(descricao)</name>
     <type>ExcelInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -554,7 +543,7 @@
     </file>
     <fields>
       <field>
-        <name>ID_Pedido_Pagamento</name>
+        <name>ID_Item</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -566,7 +555,7 @@
         <group/>
       </field>
       <field>
-        <name>ID_Pedido</name>
+        <name>ID_Produto</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -578,7 +567,7 @@
         <group/>
       </field>
       <field>
-        <name>ID_Forma_Pagamento</name>
+        <name>ID_Marca</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -590,8 +579,20 @@
         <group/>
       </field>
       <field>
-        <name>Vendas</name>
+        <name>ID_Categoria</name>
         <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Descricao</name>
+        <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -604,7 +605,7 @@
     </fields>
     <sheets>
       <sheet>
-        <name>Pedidos_Pagamento</name>
+        <name>Itens</name>
         <startrow>0</startrow>
         <startcol>0</startcol>
       </sheet>
@@ -637,14 +638,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>224</yloc>
+      <xloc>128</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
+    <name>Unique rows</name>
+    <type>Unique</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -653,76 +654,15 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <count_rows>N</count_rows>
+    <count_field/>
+    <reject_duplicate_row>N</reject_duplicate_row>
+    <error_description/>
     <fields>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>ID_Pedido_Pagamento</name>
-        <rename>ID_Pedido_Pagamento</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>ID_Pedido</name>
-        <rename>ID_Pedido</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>ID_Forma_Pagamento</name>
-        <rename>ID_Forma_Pagamento</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>Vendas</name>
-        <rename>Vendas</rename>
-        <type>Number</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>0.00</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
+      <field>
+        <name>Descricao</name>
+        <case_insensitive>Y</case_insensitive>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -733,13 +673,55 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>224</yloc>
+      <xloc>624</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Tabela Pedidos_pagamentos</name>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>Descricao</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Tabela descricoes</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -751,7 +733,7 @@
     </partitioning>
     <connection>teste_qi3</connection>
     <schema/>
-    <table>pedidos_pagamentos</table>
+    <table>descricoes</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
@@ -768,20 +750,8 @@
     <return_field/>
     <fields>
       <field>
-        <column_name>ID</column_name>
-        <stream_name>ID_Pedido_Pagamento</stream_name>
-      </field>
-      <field>
-        <column_name>PEDIDO_ID</column_name>
-        <stream_name>ID_Pedido</stream_name>
-      </field>
-      <field>
-        <column_name>FORMA_PAGAMENTO_ID</column_name>
-        <stream_name>ID_Forma_Pagamento</stream_name>
-      </field>
-      <field>
-        <column_name>PGTO_VALOR_VENDA</column_name>
-        <stream_name>Vendas</stream_name>
+        <column_name>DESCRICAO</column_name>
+        <stream_name>Descricao</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -793,14 +763,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
-      <yloc>224</yloc>
+      <xloc>816</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Table input</name>
-    <type>TableInput</type>
+    <name>Select values</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -809,83 +779,37 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>teste_qi3</connection>
-    <sql>SELECT
-  id
-FROM "public".pedidos
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>ID_Item</name>
+      </remove>
+      <remove>
+        <name>ID_Produto</name>
+      </remove>
+      <remove>
+        <name>ID_Marca</name>
+      </remove>
+      <remove>
+        <name>ID_Categoria</name>
+      </remove>
+      <meta>
+        <name>Descricao</name>
+        <rename>Descricao</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
         <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>pt_BR</date_format_locale>
-        <date_format_timezone>America/Sao_Paulo</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>560</xloc>
-      <yloc>16</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort - Pedidos_pagamentos</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>ID_Pedido</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
+        <storage_type/>
+      </meta>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -896,84 +820,8 @@ FROM "public".pedidos
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort Tabela Pedidos</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>560</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge join</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>INNER</join_type>
-    <step1>Sort - Pedidos_pagamentos</step1>
-    <step2>Sort Tabela Pedidos</step2>
-    <keys_1>
-      <key>ID_Pedido</key>
-    </keys_1>
-    <keys_2>
-      <key>id</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>560</xloc>
-      <yloc>224</yloc>
+      <xloc>288</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

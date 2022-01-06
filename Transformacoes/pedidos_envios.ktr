@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>pedidos_pagamentos</name>
+    <name>pedidos_envios</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,10 +427,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2022/01/05 21:11:13.897</created_date>
+    <created_date>2022/01/06 17:06:40.430</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2022/01/05 21:11:13.897</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2022/01/06 17:06:40.430</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -489,38 +488,48 @@
   </connection>
   <order>
     <hop>
-      <from>Aba Pedidos_envios</from>
+      <from>Aba Pedidos_Envios</from>
       <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input</from>
-      <to>Sort Tabela Pedidos</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Select values</from>
-      <to>Sort - Pedidos_pagamentos</to>
+      <to>Sort Pedidos_Envios</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort - Pedidos_pagamentos</from>
+      <from>Tabela pedidos_itens</from>
+      <to>Sort tabela_pedidos_itens</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort Pedidos_Envios</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort Tabela Pedidos</from>
+      <from>Sort tabela_pedidos_itens</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Merge join</from>
-      <to>Tabela Pedidos_pagamentos</to>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
+      <to>Sort rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows</from>
+      <to>Tabela pedidos_envios</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Aba Pedidos_envios</name>
+    <name>Aba Pedidos_Envios</name>
     <type>ExcelInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -554,7 +563,7 @@
     </file>
     <fields>
       <field>
-        <name>ID_Pedido_Pagamento</name>
+        <name>ID</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -566,7 +575,7 @@
         <group/>
       </field>
       <field>
-        <name>ID_Pedido</name>
+        <name>ID_Pedido_Item</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -578,8 +587,20 @@
         <group/>
       </field>
       <field>
-        <name>ID_Forma_Pagamento</name>
+        <name>ID_Modo_Envio</name>
         <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Data_Envio</name>
+        <type>Timestamp</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -604,7 +625,7 @@
     </fields>
     <sheets>
       <sheet>
-        <name>Pedidos_Pagamento</name>
+        <name>Pedidos_Envios</name>
         <startrow>0</startrow>
         <startcol>0</startcol>
       </sheet>
@@ -637,8 +658,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>224</yloc>
+      <xloc>80</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -656,8 +677,8 @@
     <fields>
       <select_unspecified>N</select_unspecified>
       <meta>
-        <name>ID_Pedido_Pagamento</name>
-        <rename>ID_Pedido_Pagamento</rename>
+        <name>ID</name>
+        <rename>ID</rename>
         <type>Integer</type>
         <length>-2</length>
         <precision>-2</precision>
@@ -673,8 +694,8 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>ID_Pedido</name>
-        <rename>ID_Pedido</rename>
+        <name>ID_Pedido_Item</name>
+        <rename>ID_Pedido_Item</rename>
         <type>Integer</type>
         <length>-2</length>
         <precision>-2</precision>
@@ -690,12 +711,29 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>ID_Forma_Pagamento</name>
-        <rename>ID_Forma_Pagamento</rename>
+        <name>ID_Modo_Envio</name>
+        <rename>ID_Modo_Envio</rename>
         <type>Integer</type>
         <length>-2</length>
         <precision>-2</precision>
         <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>Data_Envio</name>
+        <rename>Data_Envio</rename>
+        <type>Timestamp</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy/MM/dd HH:mm:ss.SSS</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -733,13 +771,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>224</yloc>
+      <xloc>240</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Tabela Pedidos_pagamentos</name>
+    <name>Tabela pedidos_envios</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -751,7 +789,7 @@
     </partitioning>
     <connection>teste_qi3</connection>
     <schema/>
-    <table>pedidos_pagamentos</table>
+    <table>pedidos_envios</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
@@ -769,18 +807,22 @@
     <fields>
       <field>
         <column_name>ID</column_name>
-        <stream_name>ID_Pedido_Pagamento</stream_name>
+        <stream_name>ID</stream_name>
       </field>
       <field>
-        <column_name>PEDIDO_ID</column_name>
-        <stream_name>ID_Pedido</stream_name>
+        <column_name>PEDIDO_ITEM_ID</column_name>
+        <stream_name>ID_Pedido_Item</stream_name>
       </field>
       <field>
-        <column_name>FORMA_PAGAMENTO_ID</column_name>
-        <stream_name>ID_Forma_Pagamento</stream_name>
+        <column_name>MODO_ENVIO_ID</column_name>
+        <stream_name>ID_Modo_Envio</stream_name>
       </field>
       <field>
-        <column_name>PGTO_VALOR_VENDA</column_name>
+        <column_name>DATA_ENVIO</column_name>
+        <stream_name>Data_Envio</stream_name>
+      </field>
+      <field>
+        <column_name>VALOR_VENDA</column_name>
         <stream_name>Vendas</stream_name>
       </field>
     </fields>
@@ -793,13 +835,55 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
-      <yloc>224</yloc>
+      <xloc>1056</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Table input</name>
+    <name>Sort Pedidos_Envios</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>ID_Pedido_Item</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Tabela pedidos_itens</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -811,8 +895,8 @@
     </partitioning>
     <connection>teste_qi3</connection>
     <sql>SELECT
-  id
-FROM "public".pedidos
+  id as tabela_pedidos_itens_id
+FROM "public".pedidos_itens
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -824,11 +908,11 @@ FROM "public".pedidos
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>id</name>
+        <name>tabela_pedidos_itens_id</name>
         <length>9</length>
         <precision>0</precision>
         <origin>Table input</origin>
-        <comments>id</comments>
+        <comments>tabela_pedidos_itens_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -854,13 +938,13 @@ FROM "public".pedidos
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>16</yloc>
+      <xloc>544</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Sort - Pedidos_pagamentos</name>
+    <name>Sort tabela_pedidos_itens</name>
     <type>SortRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -879,7 +963,7 @@ FROM "public".pedidos
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>ID_Pedido</name>
+        <name>tabela_pedidos_itens_id</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -896,50 +980,8 @@ FROM "public".pedidos
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort Tabela Pedidos</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>560</xloc>
-      <yloc>112</yloc>
+      <xloc>544</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -955,13 +997,13 @@ FROM "public".pedidos
       <schema_name/>
     </partitioning>
     <join_type>INNER</join_type>
-    <step1>Sort - Pedidos_pagamentos</step1>
-    <step2>Sort Tabela Pedidos</step2>
+    <step1>Sort Pedidos_Envios</step1>
+    <step2>Sort tabela_pedidos_itens</step2>
     <keys_1>
-      <key>ID_Pedido</key>
+      <key>ID_Pedido_Item</key>
     </keys_1>
     <keys_2>
-      <key>id</key>
+      <key>tabela_pedidos_itens_id</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -972,8 +1014,81 @@ FROM "public".pedidos
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>224</yloc>
+      <xloc>544</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>tabela_pedidos_itens_id</name>
+      </remove>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>ID</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>800</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
