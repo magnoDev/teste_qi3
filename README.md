@@ -34,7 +34,25 @@ Por fim, ficaram as transformações mais elaboradas.
 
 As informações que dependiam de dados externos, dados das demais abas da planilha, precisaram de um pouco mais de cuidado, por conta de ter dados nulos, datas com formatos incorretos, linhas duplicadas e afins.
 
-Concluido esse processo, tivemos então a criação do banco de dados finalizada.
+Concluido esse processo, tive como resultado a criação do banco de dados finalizada.
 
 ![](https://raw.githubusercontent.com/magnoDev/teste_qi3/main/Backup_Banco_Teste_QI3/DiagramaER-teste_qi3.png)
 > Banco de dados criado e abastecido.
+
+Por fim foi realizado a criação das consultas que para atender os questionários existentes no teste.
+
+Como eu tive um pouco de dificuldade, eu optei por algumas questões tentar fazer e apresentar diretamente no pgAdmin, salvando a Query feita além de prints da consulta junto ao resultado.
+
+![](https://raw.githubusercontent.com/magnoDev/teste_qi3/main/Apresentacao_dados/Questao01-Teste_QI3.png)
+> Exemplo de visualização feita com o PowerBI
+
+![](https://raw.githubusercontent.com/magnoDev/teste_qi3/main/Apresentacao_dados/Questao05-Teste_QI3.png)
+> Exemplo de resolução feita diretamento no pgAdmin
+
+## Dificuldades do projeto
+
+No decorrer do teste me deparei com alguns desafios, porém o que considerei maior foi a de conseguir fazer uma apresentação dos dados. Me faltou um pouco de experiência com o PowerBI e quando pensei em ir para o Excell já não tinha tempo hábil. Entretanto ter realizado as queries foi uma forma de mostrar minha capacidade de ir atrás da informação e espero que isso conte na avaliação.
+
+Agradeço a oportunidade.
+
+### Fim.
