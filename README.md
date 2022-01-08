@@ -53,6 +53,6 @@ Como eu tive um pouco de dificuldade, eu optei por algumas questões tentar faze
 
 No decorrer do teste me deparei com alguns desafios, porém o que considerei maior foi a de conseguir fazer uma apresentação dos dados. Me faltou um pouco de experiência com o PowerBI e quando pensei em ir para o Excell já não tinha tempo hábil. Entretanto ter realizado as queries foi uma forma de mostrar minha capacidade de ir atrás da informação e espero que isso conte na avaliação.
 
-Agradeço a oportunidade.
+Agradeço a oportunidade de demonstrar minhas habilidades.
 
 ### Fim.
